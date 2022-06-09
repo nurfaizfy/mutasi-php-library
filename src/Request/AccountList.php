@@ -10,14 +10,14 @@ use Mutasi\Methods\RequestInterface;
  *
  * @author Nurfaiz Fathurrahman <nurfaizfy19@gmail.com>
  */
-class UserInfo implements RequestInterface {
+class AccountList implements RequestInterface {
 
     /**
      * @var
      */
     private $token;
 
-    public const URL = 'https://app.mutasi.co.id/api/user_info';
+    public const URL = 'https://app.mutasi.co.id/api/accounts_list';
 
     /**
      * UserInfo constructor.
@@ -30,7 +30,7 @@ class UserInfo implements RequestInterface {
     /**
      * @return object
      */
-    public function getUserInfo()
+    public function getAccountList()
     {
         return $this->getRequest(self::URL);
     }
@@ -56,7 +56,7 @@ class UserInfo implements RequestInterface {
      */
     public function getResponse()
     {
-        return $this->getUserInfo()->getBody()->getContents();
+        return $this->getAccountList()->getBody()->getContents();
     }
 
     /**
@@ -65,7 +65,7 @@ class UserInfo implements RequestInterface {
      */
     public function getJson()
     {
-        return json_decode($this->getUserInfo()->getBody()->getContents());
+        return json_decode($this->getAccountList()->getBody()->getContents());
     }
 
     /**

@@ -3,6 +3,11 @@
 namespace Mutasi;
 
 use Mutasi\Request\UserInfo;
+use Mutasi\Request\AccountList;
+use Mutasi\Request\AccountDetail;
+use Mutasi\Request\Transaction;
+use Mutasi\Request\SearchAmount;
+use Mutasi\Request\Callback;
 
 /**
  * Class Main
@@ -42,6 +47,51 @@ class Main {
      */
     public function initUserInfo() {
         return new UserInfo(
+            $this->token
+        );
+    }
+
+    /**
+     * @return AccountList
+     */
+    public function initAccountList() {
+        return new AccountList(
+            $this->token
+        );
+    }
+
+    /**
+     * @return AccountDetail
+     */
+    public function initAccountDetail() {
+        return new AccountDetail(
+            $this->token
+        );
+    }
+
+    /**
+     * @return Transaction
+     */
+    public function initTransaction() {
+        return new Transaction(
+            $this->token
+        );
+    }
+
+    /**
+     * @return SearchAmount
+     */
+    public function initSearchAmount() {
+        return new SearchAmount(
+            $this->token
+        );
+    }
+
+    /**
+     * @return Callback
+     */
+    public function initCallback() {
+        return new Callback(
             $this->token
         );
     }

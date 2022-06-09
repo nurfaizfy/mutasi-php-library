@@ -10,14 +10,15 @@ use Mutasi\Methods\RequestInterface;
  *
  * @author Nurfaiz Fathurrahman <nurfaizfy19@gmail.com>
  */
-class UserInfo implements RequestInterface {
+class AccountDetail implements RequestInterface {
 
     /**
      * @var
      */
     private $token;
+    private $form;
 
-    public const URL = 'https://app.mutasi.co.id/api/user_info';
+    public const URL = 'https://app.mutasi.co.id/api/account';
 
     /**
      * UserInfo constructor.
@@ -28,9 +29,23 @@ class UserInfo implements RequestInterface {
     }
 
     /**
+     * @param array $data
+     */
+    public function setForm(array $form) {
+        $this->form = $form;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getForm() {
+        return $this->form;
+    }
+
+    /**
      * @return object
      */
-    public function getUserInfo()
+    public function getAccountDetail()
     {
         return $this->getRequest(self::URL);
     }
@@ -43,6 +58,7 @@ class UserInfo implements RequestInterface {
     public function getRequest(string $url) : object {
         $client = new Client();
         $res = $client->request('POST', $url, [
+            'form_params' => $this->getForm(),
             'headers'   =>  [
                 "Authorization" => 'Bearer '.$this->token
             ]
@@ -56,7 +72,7 @@ class UserInfo implements RequestInterface {
      */
     public function getResponse()
     {
-        return $this->getUserInfo()->getBody()->getContents();
+        return $this->getAccountDetail()->getBody()->getContents();
     }
 
     /**
@@ -65,7 +81,7 @@ class UserInfo implements RequestInterface {
      */
     public function getJson()
     {
-        return json_decode($this->getUserInfo()->getBody()->getContents());
+        return json_decode($this->getAccountDetail()->getBody()->getContents());
     }
 
     /**
